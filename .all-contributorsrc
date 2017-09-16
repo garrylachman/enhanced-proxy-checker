@@ -1,0 +1,22 @@
+{
+  "projectName": "enhanced-proxy-checker",
+  "projectOwner": "garrylachman",
+  "files": [
+    "readme.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "garrylachman",
+      "name": "Garry Lachman",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/22868432?v=3",
+      "profile": "https://github.com/garrylachman",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
+    }
+  ]
+}
