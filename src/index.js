@@ -9,10 +9,10 @@ export default class Main {
   constructor(userOptions: ConfigType) {
     this.options = Object.assign(this.options, userOptions);
   }
-  check(job: JobType): boolean {
+  check(job: JobType) {
     return Main.checkWithStrategy(this.options.defaultStrategy, job);
   }
-  static checkWithStrategy(strategyName: string, job: JobType): boolean {
+  static checkWithStrategy(strategyName: string, job: JobType) {
     const process: Process = Main.createProcess(strategyName);
     return process.check(job);
   }

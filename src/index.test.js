@@ -11,8 +11,10 @@ describe('index.js', () => {
       host: '127.0.0.1',
       port: 8080,
       proxyType: 'http',
+      timeout: 5000,
     };
     const jobResult = instance.check(job);
+    console.log(jobResult);
     expect(jobResult).not.toBeNull();
     // expect(enhancedProxyChecker('🐰')).toEqual('👉 🐰 👈');
     // expect(enhancedProxyChecker()).toEqual('No args passed!');
