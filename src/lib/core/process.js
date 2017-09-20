@@ -15,12 +15,10 @@ export default class Process extends Base {
       throw new Error('No strategy found');
     }
   }
-  check(job: JobType): boolean {
+  check(job: JobType) {
     this.logDebug(job);
 
     this.logDebug(this.strategy);
-    this.strategy.execute(job);
-
-    return true;
+    return this.strategy.execute(job);
   }
 }
