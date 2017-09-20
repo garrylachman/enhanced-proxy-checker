@@ -10,7 +10,7 @@
   },
   "repository": "https://github.com/garrylachman/enhanced-proxy-checker",
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
     "start": "nps --no-scripts",
