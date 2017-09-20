@@ -7,6 +7,7 @@ export type JobType = {
   host: string,
   port: number,
   type: ProxyType,
+  timeout: number,
 };
 
 export type ConfigType = {
