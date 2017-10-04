@@ -7,7 +7,7 @@ export type ConfigType = {
 };
 
 export type ExpectedResultHttpCode = {
-  allow: number,
+  allow: number | Array<number>,
 };
 
 export type ExpectedResultString = {
