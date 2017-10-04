@@ -3,3 +3,7 @@
 declare module 'log-util' {
   declare module.exports: any;
 }
+
+declare module 'request-promise' {
+  declare module.exports: any;
+}

@@ -23,7 +23,8 @@
     "dist"
   ],
   "dependencies": {
-    "log-util": "^1.2.0"
+    "log-util": "^1.2.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "all-contributors-cli": "^4.4.0",
@@ -33,6 +34,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
+    "caronte-proxy": "^2.2.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^4.5.0",

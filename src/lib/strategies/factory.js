@@ -1,5 +1,6 @@
 /* @flow */
 import TcpStrategy from './tcp';
+import HttpStrategy from './http';
 import type { IStrategy } from './base';
 
 type StrategiesItem = {
@@ -9,6 +10,7 @@ type StrategiesItem = {
 
 const strategies: Array<StrategiesItem> = [
   ({ name: TcpStrategy.strategyName, item: TcpStrategy }: StrategiesItem),
+  ({ name: HttpStrategy.strategyName, item: HttpStrategy }: StrategiesItem),
 ];
 
 export default function (name: string, ...args: any): ?IStrategy {

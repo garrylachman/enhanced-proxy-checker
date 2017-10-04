@@ -1,22 +1,51 @@
+import caronteProxy from 'caronte-proxy';
 import EnhancedProxyChecker from './index';
 
+const defaultProxyOptions = { auth: false };
+const caronte = caronteProxy(defaultProxyOptions);
+const instance = new EnhancedProxyChecker();
+
 describe('index.js', () => {
-  it('should say something', () => {
-    console.log(typeof EnhancedProxyChecker);
-    const instance = new EnhancedProxyChecker();
+  beforeAll(done => {
+    caronte.on('listening', () => done());
+    caronte.listen(6766);
+  });
+
+  afterAll(done => {
+    caronte.on('close', () => done());
+    caronte.close();
+  });
+
+  it('tcp', async done => {
     expect(typeof EnhancedProxyChecker).toEqual('function');
-    expect(instance.options.defaultStrategy).toEqual('tcp-strategy');
+    expect(instance.options.strategy).toEqual('tcp-strategy');
 
     const job = {
       host: '127.0.0.1',
-      port: 8080,
+      port: 6766,
       proxyType: 'http',
       timeout: 5000,
     };
-    const jobResult = instance.check(job);
-    console.log(jobResult);
+    const jobResult = await instance.check(job);
     expect(jobResult).not.toBeNull();
-    // expect(enhancedProxyChecker('🐰')).toEqual('👉 🐰 👈');
-    // expect(enhancedProxyChecker()).toEqual('No args passed!');
+    expect(jobResult).toBeTruthy();
+    done();
+  });
+
+  it('http', async done => {
+    instance.setStrategy('http-strategy');
+    expect(instance.options.strategy).toEqual('http-strategy');
+
+    const job = {
+      host: '127.0.0.1',
+      port: 6766,
+      proxyType: 'http',
+      timeout: 5000,
+      testUrl: 'http://www.example.com',
+    };
+    const jobResult = await instance.check(job);
+    expect(jobResult).not.toBeNull();
+    expect(jobResult).toBeTruthy();
+    done();
   });
 });
