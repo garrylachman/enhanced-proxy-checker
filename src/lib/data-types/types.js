@@ -1,10 +1,13 @@
 /* @flow */
 export type ProxyType = 'http' | 'https' | 'socks5' | 'socks4';
 export type StrategyName = 'tcp-strategy' | 'http-strategy';
+export type ExpectedResultName =
+  | 'basic'
+  | 'http-code'
+  | 'content-match'
+  | 'content-regex';
 
-export type ConfigType = {
-  strategy: StrategyName,
-};
+export type ExpectedResultBasic = {};
 
 export type ExpectedResultHttpCode = {
   allow: number | Array<number>,
@@ -20,9 +23,20 @@ export type ExpectedResultRegex = {
 };
 
 export type ExpectedResult =
+  | ExpectedResultBasic
   | ExpectedResultHttpCode
   | ExpectedResultString
   | ExpectedResultRegex;
+
+export type ExpectedResultObject = {
+  name: ExpectedResultName,
+  options: ExpectedResult,
+};
+
+export type ConfigType = {
+  strategy: StrategyName,
+  expectedResult: ExpectedResultObject,
+};
 
 export type JobBasicType = {|
   host: string,
@@ -33,6 +47,7 @@ export type JobBasicType = {|
 
 export type HttpTypeProperties = {|
   testUrl: string,
+  expectedResult: ExpectedResult,
 |};
 
 export type JobHttpType = {|

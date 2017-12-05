@@ -33,7 +33,11 @@ describe('index.js', () => {
   });
 
   it('http', async done => {
-    instance.setStrategy('http-strategy');
+    instance.setDefaultStrategy('http-strategy');
+    instance.setDefaultExpectedResult({
+      name: 'basic',
+      options: {},
+    });
     expect(instance.options.strategy).toEqual('http-strategy');
 
     const job = {
@@ -44,6 +48,30 @@ describe('index.js', () => {
       testUrl: 'http://www.example.com',
     };
     const jobResult = await instance.check(job);
+    expect(jobResult).not.toBeNull();
+    expect(jobResult).toBeTruthy();
+    done();
+  });
+
+  it('http - checkWithStrategy', async done => {
+    const job = {
+      host: '127.0.0.1',
+      port: 6766,
+      proxyType: 'http',
+      timeout: 5000,
+      testUrl: 'http://www.example.com',
+    };
+
+    const expectedResult = {
+      name: 'basic',
+      options: {},
+    };
+
+    const jobResult = await EnhancedProxyChecker.checkWithStrategy(
+      'http-strategy',
+      job,
+      expectedResult
+    );
     expect(jobResult).not.toBeNull();
     expect(jobResult).toBeTruthy();
     done();

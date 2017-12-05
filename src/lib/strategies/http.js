@@ -3,12 +3,14 @@
 import requestPromise from 'request-promise';
 import BaseStrategy from './base';
 import type { JobType } from '../data-types/types';
+import { IExpectedResult } from '../expected-results/base';
 
 export default class HttpStrategy extends BaseStrategy {
   static strategyName: string = 'http-strategy';
-  async execute(job: JobType) {
-    this.logDebug(job);
-    this.logDebug(job.type);
+  async execute(job: JobType, expectedResult: IExpectedResult) {
+    this.logDebug('HttpStrategy', job);
+    this.logDebug('HttpStrategy', job.type);
+    this.logDebug('HttpStrategy', expectedResult);
     let res;
     await this.httpCheck(job.host, job.port, job.timeout, job.testUrl)
       .then((result: boolean) => {

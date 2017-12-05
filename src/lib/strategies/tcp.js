@@ -2,11 +2,14 @@
 import { Socket } from 'net';
 import BaseStrategy from './base';
 import type { JobType } from '../data-types/types';
+import { IExpectedResult } from '../expected-results/base';
 
 export default class TcpStrategy extends BaseStrategy {
   static strategyName: string = 'tcp-strategy';
-  async execute(job: JobType) {
-    this.logDebug(job);
+  async execute(job: JobType, expectedResult: IExpectedResult) {
+    this.logDebug('HttpStrategy', job);
+    this.logDebug('HttpStrategy', job.type);
+    this.logDebug('HttpStrategy', expectedResult);
     let res;
     await this.tcpCheck(job.host, job.port, job.timeout)
       .then((result: boolean) => {
