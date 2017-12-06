@@ -4,7 +4,8 @@ import type { ExpectedResultName } from '../data-types/types';
 
 export default class BasicResult extends BaseExpectedResult {
   static expectedResultName: ExpectedResultName = 'basic';
-  async execute(result: any) {
+  async execute(result: any): any {
     this.logDebug(result);
+    return true;
   }
 }

@@ -7,10 +7,12 @@ export type ExpectedResultName =
   | 'content-match'
   | 'content-regex';
 
-export type ExpectedResultBasic = {};
+export type ExpectedResultBasic = {
+  alwaysReturn: boolean,
+};
 
 export type ExpectedResultHttpCode = {
-  allow: number | Array<number>,
+  allow: Array<number>,
 };
 
 export type ExpectedResultString = {
@@ -33,35 +35,49 @@ export type ExpectedResultObject = {
   options: ExpectedResult,
 };
 
-export type ConfigType = {
-  strategy: StrategyName,
-  expectedResult: ExpectedResultObject,
+export type StrategyObject = {
+  name: StrategyName,
+  options: any,
 };
 
-export type JobBasicType = {|
+export type ConfigType = {};
+
+export type JobObject = {
   host: string,
   port: number,
   type: ProxyType,
   timeout: number,
-|};
+  strategy: StrategyObject,
+  expectedResult: ExpectedResultObject,
+  testUrl: ?string, // for http only
+};
 
-export type HttpTypeProperties = {|
+export type JobBasicType = {
+  host: string,
+  port: number,
+  type: ProxyType,
+  timeout: number,
+  strategy: StrategyObject,
+  expectedResult: ExpectedResultObject,
+};
+
+export type HttpTypeProperties = {
   testUrl: string,
   expectedResult: ExpectedResult,
-|};
+};
 
-export type JobHttpType = {|
+export type JobHttpType = {
   ...JobBasicType,
   ...HttpTypeProperties,
-|};
+};
 
 export type TcpTypeProperties = {||};
-export type JobTcpType = {|
+export type JobTcpType = {
   ...JobBasicType,
   ...TcpTypeProperties,
-|};
+};
 
-export type JobType = {|
+export type JobType = {
   ...JobHttpType,
   ...JobTcpType,
-|};
+};

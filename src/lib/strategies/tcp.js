@@ -1,17 +1,17 @@
 /* @flow */
 import { Socket } from 'net';
 import BaseStrategy from './base';
-import type { JobType } from '../data-types/types';
+import Job from '../core/job';
 import { IExpectedResult } from '../expected-results/base';
 
 export default class TcpStrategy extends BaseStrategy {
   static strategyName: string = 'tcp-strategy';
-  async execute(job: JobType, expectedResult: IExpectedResult) {
-    this.logDebug('HttpStrategy', job);
-    this.logDebug('HttpStrategy', job.type);
-    this.logDebug('HttpStrategy', expectedResult);
+  async execute(job: Job, expectedResult: IExpectedResult) {
+    this.logDebug(this.constructor.name, 'job', job);
+    this.logDebug(this.constructor.name, 'job:type', job.getType());
+    this.logDebug(this.constructor.name, 'expectedResult', expectedResult);
     let res;
-    await this.tcpCheck(job.host, job.port, job.timeout)
+    await this.tcpCheck(job.getHost(), job.getPort(), job.getTimeout())
       .then((result: boolean) => {
         res = result;
       })
